@@ -10,19 +10,20 @@ import BookmarksPage from './pages/Bookmarks/Bookmarks'
 import ListsPage from './pages/Lists/Lists'
 import ProfilePage from './pages/Profile/Profile'
 import MorePage from './pages/More/More'
-import TrendCard from './components/TrendCard/TrendCard'
-import FollowComp from './components/FollowComp/FollowComp'
+
+import Tweets from './pages/Profile/ProfileLinks/Tweets'
+import TweetsReplies from './pages/Profile/ProfileLinks/TweetsReplies'
+import Media from './pages/Profile/ProfileLinks/Media'
+import Likes from './pages/Profile/ProfileLinks/Likes'
 
 import {Bookmarks, Explore, Home, Lists, Messages, More, Notification, Profile} from './assets/icon'
 import Logo from './assets/Images/Login-logo.svg'
 import Contact from './assets/Images/contact.png'
 import MoreImg from './assets/Images/more.svg'
-import SearchIcon from './assets/Images/search-icon.svg'
-import Settings from './assets/Images/settings.svg'
-import User1 from './assets/Images/xUser1.svg'
-import User2 from './assets/Images/xUser2.png'
+import RightBar from './components/RightBar/RightBar'
 
 function Authentification() {
+  const [state, setState] = useState(false)
   return (
     <div className='flex justify-center'>
       <div className='overflow-y-auto h-[100vh] w-[17%] flex flex-col ml-[50px] mt-[20px] border-r-[1px] border-r-solid border-r-[#D8D8D8]'>
@@ -69,18 +70,24 @@ function Authentification() {
 
       <div className='overflow-y-auto v-[100vh] w-[50%]'>
         <Routes>
-          <Route path='/' element={<HomePage/>}/>
+          <Route path='/' element={<HomePage setState={setState}/>}/>
           <Route path='/explore' element={<ExplorePage/>}/>
           <Route path='/notification' element={<NotifitacionPage/>}/>
           <Route path='/messages' element={<MessagesPage/>}/>
           <Route path='/bookmarks' element={<BookmarksPage/>}/>
           <Route path='/lists' element={<ListsPage/>}/>
-          <Route path='/profile' element={<ProfilePage/>}/>
+          <Route path='/profile' element={<ProfilePage setState={setState}/>}>
+            <Route path='' element={<Tweets/>}/>
+            <Route path='tweets-replies' element={<TweetsReplies/>}/>
+            <Route path='media' element={<Media/>}/>
+            <Route path='likes' element={<Likes/>}/>
+          </Route>
           <Route path='/more' element={<MorePage/>}/>
         </Routes>
       </div>
 
-      <div className='w-[30%] flex flex-col items-center overflow-y-auto h-[100vh] py-[20px] border-l-[1px] border-l-[#D8D8D8] border-l-solid'>
+      <RightBar state={state}/>
+      {/* <div className='w-[30%] flex flex-col items-center overflow-y-auto h-[100vh] py-[20px] border-l-[1px] border-l-[#D8D8D8] border-l-solid'>
         <div className='relative mb-[20px]'>
           <img className='absolute left-[22px] top-[27%]' src={SearchIcon} width={19.5} height={19.5} />
           <input className='w-[373px] rounded-[31px] py-[12px] pl-[64px] bg-[#EFF3F4]' placeholder='Search Twitter' type="search" required name="search"/>
@@ -112,7 +119,7 @@ function Authentification() {
           </div>
           <p className='text-[16px] font-normal leading-5'>Imprint Ads Info More ··· © 2021 Twitter, Inc.</p>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

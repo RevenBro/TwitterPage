@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Header from '../../components/Header/Header'
 import PostItem from '../../components/PostItem/PostItem'
@@ -10,7 +10,11 @@ import Cloutex from '../../assets/Images/cloutex.png'
 import Creative from '../../assets/Images/creative.png'
 import PostHeroImg from '../../assets/Images/postHeroImg.png'
 
-function Home() {
+function Home({setState}) {
+
+  useEffect(() => {
+    setState(false)
+  },[])
 
   const [getPosts, setGetPosts] = useState([
     {
